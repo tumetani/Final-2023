@@ -10,12 +10,14 @@ import frc.robot.Constants.ControllerPorts;
 import frc.robot.commands.OutakeObject;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.DriveTime;
+import frc.robot.commands.ElevatorExtend;
 import frc.robot.commands.IntakeObject;
 import frc.robot.commands.LiftArm;
 import frc.robot.commands.LowerArm;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Elevator;
 import frc.robot.Constants.Speeds;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -37,6 +39,7 @@ public class RobotContainer {
   private final Intake m_intake = new Intake();
   private final Arm m_arm = new Arm();
   private final DriveTrain m_drive = new DriveTrain();
+  private final Elevator m_elevator = new Elevator();
   // Replace with CommandPS4Controller or CommandJoystick if needed
   public XboxController driverController = new XboxController(ControllerPorts.kDriverControllerPort);
   public Joystick subControllerJoystick = new Joystick(ControllerPorts.kJoystickPort);
@@ -49,7 +52,7 @@ public class RobotContainer {
     configureBindings();
     m_arm.setDefaultCommand(new LiftArm(m_arm, 0));
     m_intake.setDefaultCommand(new IntakeObject(m_intake, 0));
-
+    m_elevator.setDefaultCommand(new ElevatorExtend(m_elevator, 0));
   }
 
   private void configureBindings() {
@@ -99,6 +102,12 @@ public class RobotContainer {
       m_arm.setArmSpeed(0.67);
     } else {
       m_arm.setArmSpeed(0.00);
+    }
+  }
+
+  public void Elevator() {
+    if (subControllerJoystick.isConnected()) {
+      m_elevator.elevatorUp(subControllerJoystick.getRawAxis(1) * -1 * Constants.Speeds.ELEVATOR_JOYSTICK_COEFFICIENT);
     }
   }
 

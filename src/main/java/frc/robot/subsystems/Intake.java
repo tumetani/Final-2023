@@ -16,6 +16,8 @@ public class Intake extends SubsystemBase {
   CANSparkMax RightIntake = new CANSparkMax(9, MotorType.kBrushless);
 
   public Intake() {
+    LeftIntake.restoreFactoryDefaults();
+    RightIntake.restoreFactoryDefaults();
   }
 
   public void setIntakeSpeed(double speed) {

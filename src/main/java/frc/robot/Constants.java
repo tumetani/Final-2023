@@ -30,6 +30,7 @@ public final class Constants {
     public static final double ARM_SPEED = 0.6;
     public static final double DRIVE_SPEED = 0.6;
     public static final double INTAKE_SPEED = 0.4;
+    public static final double ELEVATOR_JOYSTICK_COEFFICIENT = 0.85;
 
   }
 }
