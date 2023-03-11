@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import frc.robot.Constants.Speeds;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -26,7 +27,7 @@ public class IntakeObject extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_intake.setIntakeSpeed(0.70);
+    m_intake.setIntakeSpeed(m_speed);
   }
 
   // Called once the command ends or is interrupted.

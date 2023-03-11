@@ -9,7 +9,7 @@ import frc.robot.Constants.ControllerPorts;
 //import frc.robot.commands.Autos;
 import frc.robot.commands.OutakeObject;
 import frc.robot.commands.ArcadeDrive;
-import frc.robot.commands.DriveTime;
+//import frc.robot.commands.DriveTime;
 import frc.robot.commands.IntakeObject;
 import frc.robot.commands.LiftArm;
 import frc.robot.commands.LowerArm;
@@ -36,19 +36,19 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Intake m_intake = new Intake();
   private final Arm m_arm = new Arm();
-  private final DriveTrain m_drive = new DriveTrain();
+  
   // Replace with CommandPS4Controller or CommandJoystick if needed
   public XboxController driverController = new XboxController(ControllerPorts.kDriverControllerPort);
   public Joystick subControllerJoystick = new Joystick(ControllerPorts.kJoystickPort);
+  private final DriveTrain m_drive = new DriveTrain();
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    // Configure the trigger bindings
+    //Configure the trigger bindings
     configureBindings();
-    m_arm.setDefaultCommand(new LiftArm(m_arm, 0));
-    m_intake.setDefaultCommand(new IntakeObject(m_intake, 0));
+
 
   }
 
@@ -57,7 +57,7 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is
     // pressed,
     // cancelling on release.
-    // driverController.getRawButton(1).whileTrue(m_exampleSubsystem.exampleMethodCommand());
+    m_drive.setDefaultCommand(getArcadeDriveCommand());
   }
 
   public void Intake() {
@@ -102,7 +102,7 @@ public class RobotContainer {
     }
   }
 
-  public Command getAutonomousCommand() {
+  /*public Command getAutonomousCommand() {
     return new SequentialCommandGroup(
         // new LiftArm(m_arm, Speeds.ARM_SPEED).withTimeout(1),
         //new DriveTime(Speeds.DRIVE_SPEED, 2, m_drive),
@@ -110,13 +110,13 @@ public class RobotContainer {
         new ElevatorExtend(m_elevator,Speeds.ELEVATOR_SPEED).withTimeout(1),
         new OutakeObject(m_intake, 0.80).withTimeout(1),
         new DriveTime(Speeds.DRIVE_SPEED, 2);
-
+*/
 
 
     // new Outake(m_intake, Constants.INTAKE_SPEED).withTimeout(3),
     // new LowerArm(m_arm, Speeds.ARM_SPEED).withTimeout(1));
 
-  }
+
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -125,7 +125,7 @@ public class RobotContainer {
    */
   // public Command getAutonomousCommand() {}
   // An example command will be run in autonomous
-  public Command getarcadeDriveCommand() {
+  public Command getArcadeDriveCommand() {
     return new ArcadeDrive(
         m_drive, () -> -driverController.getRawAxis(1), () -> driverController.getRawAxis(4));
   }

@@ -26,7 +26,7 @@ public class OutakeObject extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_intake.setIntakeSpeed(-0.70);
+    m_intake.setIntakeSpeed(m_speed);
   }
 
   // Called once the command ends or is interrupted.
