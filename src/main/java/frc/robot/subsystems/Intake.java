@@ -6,8 +6,6 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
@@ -16,16 +14,23 @@ public class Intake extends SubsystemBase {
   CANSparkMax RightIntake = new CANSparkMax(9, MotorType.kBrushless);
 
   public Intake() {
+    LeftIntake.restoreFactoryDefaults();
+    RightIntake.restoreFactoryDefaults();
   }
 
   public void setIntakeSpeed(double speed) {
+    LeftIntake.set(speed);
+    RightIntake.set(speed);
+  }
+
+  public void intake(double speed) {
     LeftIntake.set(speed);
     RightIntake.set(-speed);
   }
 
   public void outake(double speed) {
-    LeftIntake.set(-speed);
-    RightIntake.set(speed);
+    LeftIntake.set(speed);
+    RightIntake.set(-speed);
   }
 
   public void hold(double speed) {
@@ -41,6 +46,5 @@ public class Intake extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
   }
 }
