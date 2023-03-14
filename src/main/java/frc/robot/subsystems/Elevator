@@ -1,0 +1,43 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot.subsystems;
+
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class Elevator extends SubsystemBase {
+  CANSparkMax elevator_motorA = new CANSparkMax(6, MotorType.kBrushless);
+  CANSparkMax elevator_motorB = new CANSparkMax(7, MotorType.kBrushless);
+
+  public Elevator() {
+  }
+
+  public void setElevatorSpeed(double speed) {
+    elevator_motorA.set(speed);
+    elevator_motorB.set(-speed);
+  }
+
+  public void ElevatorStop() {
+    elevator_motorA.set(0);
+    elevator_motorB.set(0);
+  }
+
+  public void ElevatorUp(double speed) {
+    elevator_motorA.set(speed);
+    elevator_motorB.set(-speed);
+  }
+
+  public void ElevatorDown(double speed) {
+    elevator_motorA.set(-speed);
+    elevator_motorB.set(speed);
+  }
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+  }
+}
