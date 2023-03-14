@@ -5,16 +5,22 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.Arm;
+import java.util.function.Supplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class LiftArm extends CommandBase {
+  private final Supplier<Boolean> up, down;
+
   private final Arm m_arm;
   double m_speed;
 
-  public LiftArm(Arm subsystem, double speed) {
+  public LiftArm(Arm subsystem, Supplier<Boolean> upButton, Supplier<Boolean> downButton) {
     m_arm = subsystem;
+    up = upButton;
+    down = downButton;
     addRequirements(m_arm);
-    m_speed = speed;
+
   }
 
   // Called when the command is initially scheduled.
@@ -25,7 +31,14 @@ public class LiftArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_arm.setArmSpeed(-0.77);
+    if (up.get()) {
+      m_arm.raise(-1.0);
+    } else if (down.get()) {
+      m_arm.lower(1.0);
+    } else {
+      m_arm.armstop();
+    }
+
   }
 
   @Override
