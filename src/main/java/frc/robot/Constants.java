@@ -32,4 +32,11 @@ public final class Constants {
     public static final double INTAKE_SPEED = 0.4;
 
   }
+
+  public static class Encoder {
+    public static final double NEO_POSITION_CONVERSION_FACTOR = 20.1 / 360; 
+    public static final double ARM_LOWEST_POSITION = 15;
+    public static final double ARM_HIGHEST_POSITION = -3;
+
+  }
 }
