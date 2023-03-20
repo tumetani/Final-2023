@@ -7,6 +7,8 @@ package frc.robot;
 import frc.robot.Constants.ControllerPorts;
 
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.AutoBalance;
+import frc.robot.commands.BalanceCalc;
 import frc.robot.commands.DriveTime;
 import frc.robot.commands.ElevatorUp;
 import frc.robot.commands.IntakeObject;
@@ -36,6 +38,7 @@ public class RobotContainer {
   private final Arm m_arm = new Arm();
   private final Elevator m_elevator = new Elevator();
   private final DriveTrain m_drive = new DriveTrain();
+  private final BalanceCalc m_balancecalc = new BalanceCalc();
 
   public XboxController driverController = new XboxController(ControllerPorts.kDriverControllerPort);
   public Joystick subControllerJoystick = new Joystick(ControllerPorts.kJoystickPort);
@@ -76,8 +79,11 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // return new InstantCommand();
     return new SequentialCommandGroup(
-        new DriveTime(Speeds.DRIVE_SPEED, 3, m_drive));
+      new AutoBalance(m_balancecalc, m_drive)
+    );
 
+    
+    // new DriveTime(Speeds.DRIVE_SPEED, 3, m_drive)
     // new DriveTrain(Speeds.DRIVE_SPEED, 2, m_drive);
     // new LiftArm(m_arm, Speeds.ARM_SPEED).withTimeout(1),
     // new DriveTrain(Speeds.DRIVE_SPEED, 2, m_drive),
